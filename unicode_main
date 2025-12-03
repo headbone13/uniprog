@@ -1,0 +1,62 @@
+import socket
+import time
+print("Привет. Давай знакомиться.")
+input()
+name = input("Как тебя зовут? ")
+print(f"Привет, {name}! Я Юни - твой личный помощник в этом приложении.")
+
+print("Это приложение поможет тебе быстрее и удобнее выполнять различные задачи. Поиск в интернете, калькулятор, игры с окнами.")
+print("Спасибо, что используешь мой приложение. Если у тебя есть какие-либо предложения, напиши моим разработчикам:")
+print("headbone13@inbox.ru")
+input()
+print("Итак, узнаю нужную информацию о тебе...")
+computer_name = socket.gethostname()
+print(f"Твой компьютер: {computer_name}")
+import requests
+
+try:
+    print("Попытка получить IP адрес...")
+    response = requests.get('https://api.ipify.org?format=json', timeout=10)
+    if response.status_code == 200:
+        ip_address = response.json()['ip']
+        print(f"Твой IP адрес: {ip_address}")
+    else:
+        print(f"Ошибка получения IP: статус {response.status_code}")
+except requests.exceptions.RequestException as e:
+    print(f"Ошибка сети при получении IP адреса: {e}")
+except Exception as e:
+    print(f"Не удалось получить IP адрес: {e}")
+
+print(f"Вроде разобрались, {name} с компьютером {computer_name} и IP {ip_address}")
+print("Анализирую данные...")
+print("Данные анализированы.")
+print("Создаю окна...")
+
+import tkinter as tk
+import socket
+
+root = tk.Tk()
+root.title(ip_address)
+root.geometry("500x250")
+
+label1 = tk.Label(root, text=f"Привет, {computer_name}. Это снова я, Юни)", font=("Montserrat", 14))
+label1.pack(pady=50)
+
+label2 = tk.Label(root, text=f"{ip_address}", font=("Montserrat", 9))
+label2.pack(pady=1)
+
+def create_new_window():
+    new_window = tk.Toplevel(root)
+    new_window.title(ip_address)
+    new_window.geometry("300x200")
+    label = tk.Label(new_window, text="Это малая часть того, что я могу сделать", font=("Montserrat", 14))
+    label.pack(pady=50)
+
+button = tk.Button(root, text="Продолжить", command=create_new_window, font=("Montserrat", 12))
+button.pack(pady=20)
+root.mainloop()
+
+print("Ты закрыл окна.")
+print("Ну что. Опробовали и хватит. У тебя спящий режим.")
+input()
+exit
